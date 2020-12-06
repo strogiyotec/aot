@@ -1015,15 +1015,9 @@ func main() {
 		match := validPsw.FindAllStringSubmatch(password, -1)
 		from, _ := strconv.Atoi(match[0][1])
 		to, _ := strconv.Atoi(match[0][2])
-		char := []rune(match[0][3])[0]
+		char := match[0][3][0]
 		word := match[0][4]
-		charCnt := 0
-		for _, r := range word {
-			if string(char) == string(r) {
-				charCnt++
-			}
-		}
-		if charCnt >= from && charCnt <= to {
+		if (word[from-1] == char && word[to-1] != char) || (word[from-1] != char && word[to-1] == char) {
 			cnt++
 		}
 	}
