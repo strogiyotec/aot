@@ -9,14 +9,14 @@ import (
 
 // TODO check how jump works, the way I implemented is not correct
 func main() {
-	inputFile, _ := ioutil.ReadFile("small_input")
+	inputFile, _ := ioutil.ReadFile("input")
 	lines := strings.Split(string(inputFile), "\n")
-	counterTracker := make(map[string]int)
+	counterTracker := make(map[int]bool)
 	lineCnt := 0
 	sum := 0
-	for counterTracker[lines[lineCnt]] != 2 {
+	for !counterTracker[lineCnt] {
 		fmt.Printf("%d %d\n", sum, lineCnt)
-		counterTracker[lines[lineCnt]]++
+		counterTracker[lineCnt] = true
 		instruction := lines[lineCnt][0:3]
 		sign := lines[lineCnt][4]
 		number, _ := strconv.Atoi(lines[lineCnt][5:])
