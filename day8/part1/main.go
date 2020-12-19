@@ -7,9 +7,8 @@ import (
 	"strings"
 )
 
-// TODO check how jump works, the way I implemented is not correct
 func main() {
-	inputFile, _ := ioutil.ReadFile("input")
+	inputFile, _ := ioutil.ReadFile("small")
 	lines := strings.Split(string(inputFile), "\n")
 	counterTracker := make(map[int]bool)
 	lineCnt := 0
