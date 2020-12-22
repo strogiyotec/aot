@@ -10,7 +10,6 @@ import (
 func main() {
 	inputFile, _ := ioutil.ReadFile("input")
 	lines := strings.Split(string(inputFile), "\n")
-	earliest, _ := strconv.Atoi(lines[0])
 	busses := []int{}
 
 	ids := strings.Split(string(lines[1]), ",")
@@ -18,18 +17,17 @@ func main() {
 		numId, e := strconv.Atoi(id)
 		if e == nil {
 			busses = append(busses, numId)
+		} else {
+			busses = append(busses, 1)
 		}
 	}
-	fmt.Println(busses, earliest)
-	smallestNearest := 2147483647
-	busId := 0
-	for _, bus := range busses {
-		wait := ((earliest / bus) * bus) + bus
-		if smallestNearest > wait {
-			smallestNearest = wait
-			busId = bus
+	times := 0
+	stepSize := busses[0]
+	for i := 1; i < len(busses); i++ {
+		for (times+i)%busses[i] != 0 {
+			times += stepSize
 		}
+		stepSize *= busses[i]
 	}
-	needToWait := (smallestNearest - earliest) * busId
-	fmt.Println(needToWait)
+	fmt.Println(times)
 }
