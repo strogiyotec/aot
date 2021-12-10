@@ -13,7 +13,7 @@ type parts struct {
 }
 
 func NewPart(line string) parts {
-	points := strings.Split(line, ",")
+	points := strings.Split(strings.TrimSpace(line), ",")
 	from, _ := strconv.Atoi(points[0])
 	to, _ := strconv.Atoi(points[1])
 	return parts{from: from, to: to}
@@ -24,7 +24,7 @@ func (part parts) similar(another parts) bool {
 }
 
 func main() {
-	content, _ := ioutil.ReadFile("small_input.txt")
+	content, _ := ioutil.ReadFile("input.txt")
 	lines := strings.Split(string(content), "\n")
 	cnt := make(map[string]int)
 	for _, v := range lines {
@@ -53,7 +53,6 @@ func main() {
 			}
 		}
 	}
-	fmt.Println(cnt)
 	totalPoints := 0
 	for _, v := range cnt {
 		if v >= 2 {
@@ -70,16 +69,32 @@ func sameX(first, second parts) bool {
 	return false
 }
 func max(first, second parts) int {
-	if first.to >= second.to {
-		return first.to
+	if first.from == second.from {
+		if first.to > second.to {
+			return first.to
+		} else {
+			return second.to
+		}
 	} else {
-		return second.to
+		if first.from > second.from {
+			return first.from
+		} else {
+			return second.from
+		}
 	}
 }
 func min(first, second parts) int {
-	if first.from <= second.from {
-		return first.from
+	if first.from == second.from {
+		if first.to < second.to {
+			return first.to
+		} else {
+			return second.to
+		}
 	} else {
-		return second.from
+		if first.from < second.from {
+			return first.from
+		} else {
+			return second.from
+		}
 	}
 }
