@@ -1,2 +1,2 @@
-# aot
+# aoc
 Advent of Code solutions 
