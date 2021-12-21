@@ -54,12 +54,8 @@ max_x += 200
 min_y -= 200
 max_y += 200
 
-for i in range(50):
+for i in range(2):
     image = enhance(image, (min_x, max_x, min_y, max_y))
-    min_x += 3
-    max_x -= 3
-    min_y += 3
-    max_y -= 3
 
 print(len(image))
 
